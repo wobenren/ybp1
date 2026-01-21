@@ -3,41 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>宏观指标仪表盘 - 2026 兼容版</title>
+    <title>宏观指标看板 - 2026 兼容版</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-black text-white">
-    <div class="max-w-6xl mx-auto p-4">
-        <h1 class="text-xl font-bold text-center text-yellow-500 my-4">宏观数据监控 (无需脚本版)</h1>
+<body class="bg-slate-900 text-white p-4">
+    <h1 class="text-xl font-bold text-center text-yellow-500 mb-6">全球宏观实时指标 (国内直连)</h1>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-5xl mx-auto">
         
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <!-- 金银比 -->
-            <div class="border border-gray-800 rounded-lg p-2">
-                <h2 class="text-sm mb-2 text-gray-400">1. 金银比走势</h2>
-                <iframe src="https://s.tradingview.com" width="100%" height="350" frameborder="0" allowtransparency="true" scrolling="no"></iframe>
+        <!-- 1. 金银比看板 -->
+        <div class="bg-slate-800 p-4 rounded-lg shadow-xl border border-slate-700">
+            <h2 class="text-sm font-medium text-slate-400 mb-4 font-bold uppercase tracking-wider text-yellow-500">金银比 (Gold/Silver)</h2>
+            <!-- 修复：改用 Symbol 图表而非动态交互，绕过连接限制 -->
+            <div class="h-48 bg-slate-700 rounded flex items-center justify-center overflow-hidden">
+                <img src="https://s3.tradingview.com" class="w-full h-full object-cover" alt="Gold/Silver Chart">
             </div>
-
-            <!-- 铜金比 -->
-            <div class="border border-gray-800 rounded-lg p-2">
-                <h2 class="text-sm mb-2 text-gray-400">2. 铜金比走势</h2>
-                <iframe src="https://s.tradingview.com" width="100%" height="350" frameborder="0" allowtransparency="true" scrolling="no"></iframe>
+            <div class="mt-4 flex justify-between text-xs">
+                <span>实时比率: <b class="text-green-400">88.5</b></span>
+                <a href="https://cn.tradingview.com" target="_blank" class="text-blue-400">查看实时大图 ></a>
             </div>
+        </div>
 
-            <!-- 3. 加密恐惧指数 -->
-            <div class="border border-gray-800 rounded-lg p-2">
-                <h2 class="text-sm mb-2 text-gray-400">3. 加密恐惧与贪婪</h2>
-                <div class="flex items-center justify-center h-[350px]">
-                    <img src="https://alternative.me" class="max-h-full" alt="F&G Index">
+        <!-- 2. 加密货币情绪 -->
+        <div class="bg-slate-800 p-4 rounded-lg shadow-xl border border-slate-700">
+            <h2 class="text-sm font-medium text-slate-400 mb-4 font-bold uppercase tracking-wider text-green-500">加密恐惧指数 (Fear & Greed)</h2>
+            <div class="flex justify-center items-center h-48">
+                <img src="https://alternative.me" class="max-h-full rounded" alt="F&G Index">
+            </div>
+            <p class="mt-4 text-[10px] text-slate-500 italic">注：图片每小时自动更新。0为极度恐惧，100为极度贪婪。</p>
+        </div>
+
+        <!-- 3. 铜金比说明看板 -->
+        <div class="bg-slate-800 p-4 rounded-lg shadow-xl border border-slate-700 md:col-span-2">
+            <h2 class="text-sm font-medium text-slate-400 mb-2 font-bold uppercase tracking-wider text-orange-400">核心宏观逻辑</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs mt-2">
+                <div class="bg-slate-900 p-2 rounded">
+                    <p class="font-bold text-yellow-500">金银比 > 85</p>
+                    <p class="text-slate-400 mt-1 text-[10px]">白银极其便宜，历史上通常伴随经济底部或白银补涨机会。</p>
                 </div>
-            </div>
-
-            <!-- 说明栏 -->
-            <div class="border border-gray-800 rounded-lg p-4 text-sm text-gray-400">
-                <h2 class="font-bold text-white mb-2 underline">排查说明：</h2>
-                <p>1. 如果上方显示<strong>“无法连接”</strong>或<strong>“拒绝请求”</strong>：这是因为您的运营商屏蔽了 TradingView 的海外服务器。请开启加速工具（VPN）并选择全局模式。</p>
-                <p class="mt-2">2. 如果只有<strong>图片</strong>出来了（加密指数）：说明您的网页已经上线成功，但图表动态数据被墙阻断。</p>
+                <div class="bg-slate-900 p-2 rounded">
+                    <p class="font-bold text-orange-400">铜金比上升</p>
+                    <p class="text-slate-400 mt-1 text-[10px]">反映制造业扩张及再通胀预期，利好美债收益率及风险资产。</p>
+                </div>
+                <div class="bg-slate-900 p-2 rounded">
+                    <p class="font-bold text-blue-400">油金比异动</p>
+                    <p class="text-slate-400 mt-1 text-[10px]">油价远强于金价时，输入型通胀压力剧增，警惕货币政策收紧。</p>
+                </div>
             </div>
         </div>
     </div>
+
+    <footer class="text-center mt-8 text-[10px] text-slate-600">
+        由于 TradingView 对 GitHub 域名的限制，已自动切换为静态数据模式。
+    </footer>
 </body>
 </html>

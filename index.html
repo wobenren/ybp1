@@ -3,71 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>全球宏观指标仪表盘 - 2026版</title>
+    <title>宏观指标仪表盘 - 2026 稳定版</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .iframe-container { width: 100%; height: 400px; border: none; border-radius: 8px; }
+    </style>
 </head>
-<body class="bg-gray-900 text-white p-4">
+<body class="bg-[#0a0e17] text-white p-4">
     <header class="text-center mb-8">
-        <h1 class="text-2xl font-bold text-yellow-500">宏观资产比例与情绪监控</h1>
-        <p class="text-xs text-gray-500 mt-2">数据每分钟自动刷新</p>
+        <h1 class="text-2xl font-bold text-yellow-500">宏观指标仪表盘</h1>
+        <p class="text-gray-400 text-sm mt-1">实时数据监控（不依赖外部 JS 库）</p>
     </header>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-7xl mx-auto">
-        <!-- 金银比 -->
-        <div class="bg-gray-800 p-4 rounded-xl border border-gray-700 shadow-2xl">
-            <h2 class="text-lg font-bold mb-3 border-l-4 border-yellow-500 pl-2">金银比 (Gold/Silver)</h2>
-            <div id="chart_gs" class="h-[400px]"></div>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-7xl mx-auto">
+        
+        <!-- 1. 金银比 -->
+        <div class="bg-[#131722] p-4 rounded-xl shadow-lg border border-gray-800">
+            <h2 class="text-lg font-semibold mb-3 text-yellow-500">金银比 (Gold/Silver)</h2>
+            <iframe class="iframe-container" src="https://s.tradingview.com"></iframe>
+            <p class="mt-2 text-xs text-gray-500 italic">说明：反映贵金属市场避险情绪与工业需求失衡。</p>
         </div>
 
-        <!-- 铜金比 -->
-        <div class="bg-gray-800 p-4 rounded-xl border border-gray-700 shadow-2xl">
-            <h2 class="text-lg font-bold mb-3 border-l-4 border-orange-500 pl-2">铜金比 (Copper/Gold)</h2>
-            <div id="chart_cg" class="h-[400px]"></div>
+        <!-- 2. 铜金比 -->
+        <div class="bg-[#131722] p-4 rounded-xl shadow-lg border border-gray-800">
+            <h2 class="text-lg font-semibold mb-3 text-orange-400">铜金比 (Copper/Gold)</h2>
+            <iframe class="iframe-container" src="https://s.tradingview.com"></iframe>
+            <p class="mt-2 text-xs text-gray-500 italic">说明：经济增长领先指标，与十年期美债收益率高度相关。</p>
         </div>
 
-        <!-- 油金比 -->
-        <div class="bg-gray-800 p-4 rounded-xl border border-gray-700 shadow-2xl">
-            <h2 class="text-lg font-bold mb-3 border-l-4 border-blue-500 pl-2">油金比 (WTI Oil/Gold)</h2>
-            <div id="chart_og" class="h-[400px]"></div>
+        <!-- 3. 油金比 -->
+        <div class="bg-[#131722] p-4 rounded-xl shadow-lg border border-gray-800">
+            <h2 class="text-lg font-semibold mb-3 text-blue-400">油金比 (WTI Oil/Gold)</h2>
+            <iframe class="iframe-container" src="https://s.tradingview.com"></iframe>
+            <p class="mt-2 text-xs text-gray-500 italic">说明：衡量能源成本与资产保值能力的相对强弱。</p>
         </div>
 
-        <!-- 加密恐惧指数 -->
-        <div class="bg-gray-800 p-4 rounded-xl border border-gray-700 shadow-2xl">
-            <h2 class="text-lg font-bold mb-3 border-l-4 border-green-500 pl-2">加密货币恐惧与贪婪指数</h2>
-            <div class="flex justify-center items-center h-[350px]">
-                <img src="https://alternative.me" class="max-h-full rounded-lg" alt="Fear and Greed Index">
+        <!-- 4. 加密恐惧与贪婪 -->
+        <div class="bg-[#131722] p-4 rounded-xl shadow-lg border border-gray-800">
+            <h2 class="text-lg font-semibold mb-3 text-green-400">加密货币恐惧与贪婪指数</h2>
+            <div class="flex justify-center items-center h-[400px]">
+                <img src="https://alternative.me" class="max-h-full rounded shadow-md" alt="F&G Index">
             </div>
+            <p class="mt-2 text-xs text-gray-500 italic">说明：0-20 为极度恐惧（低吸机会），80-100 为极度贪婪（减仓预警）。</p>
         </div>
+
     </div>
 
-    <!-- 关键修复：使用异步加载并确保符号名带上交易所前缀 -->
-    <script type="text/javascript" src="https://s3.tradingview.com"></script>
-    <script type="text/javascript">
-        function initCharts() {
-            if (typeof TradingView === 'undefined') return;
-
-            const baseConfig = {
-                "autosize": true,
-                "interval": "D",
-                "timezone": "Etc/UTC",
-                "theme": "dark",
-                "style": "1",
-                "locale": "zh_CN",
-                "enable_publishing": false,
-                "hide_top_toolbar": false,
-                "hide_legend": false,
-                "save_image": false,
-                "container_id": ""
-            };
-
-            // 修复点：必须指定明确的交易所前缀，否则无法解析比率
-            new TradingView.widget({ ...baseConfig, "container_id": "chart_gs", "symbol": "FX_IDC:XAUUSD/FX_IDC:XAGUSD" });
-            new TradingView.widget({ ...baseConfig, "container_id": "chart_cg", "symbol": "COMEX:HG1!/TVC:GOLD" });
-            new TradingView.widget({ ...baseConfig, "container_id": "chart_og", "symbol": "NYMEX:CL1!/TVC:GOLD" });
-        }
-
-        // 确保脚本加载后执行
-        window.onload = initCharts;
-    </script>
+    <footer class="text-center py-10 text-gray-600 text-xs">
+        Data provided by TradingView & Alternative.me
+    </footer>
 </body>
 </html>

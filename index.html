@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全球宏观指标仪表盘 - 2026版</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .chart-container { height: 400px; margin-bottom: 2rem; }
+    </style>
+</head>
+<body class="bg-gray-900 text-white p-5">
+    <header class="text-center mb-10">
+        <h1 class="text-3xl font-bold text-yellow-500">宏观资产比例与情绪监控</h1>
+        <p class="text-gray-400">实时追踪金银比、铜金比、油金比及加密情绪</p>
+    </header>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- 金银比 -->
+        <div class="bg-gray-800 p-4 rounded-xl shadow-lg">
+            <h2 class="text-xl mb-2 font-semibold">1. 金银比 (Gold/Silver Ratio)</h2>
+            <div id="gs_chart" class="chart-container">
+                <!-- TradingView Widget BEGIN -->
+                <div class="tradingview-widget-container" style="height:100%;width:100%">
+                    <div id="tradingview_gs"></div>
+                    <script type="text/javascript" src="https://s3.tradingview.com"></script>
+                    <script type="text/javascript">
+                    new TradingView.widget({
+                        "autosize": true, "symbol": "TVC:GOLD/TVC:SILVER", "interval": "D",
+                        "timezone": "Etc/UTC", "theme": "dark", "style": "1", "locale": "zh_CN",
+                        "container_id": "tradingview_gs", "hide_side_toolbar": true, "allow_symbol_change": false
+                    });
+                    </script>
+                </div>
+            </div>
+            <p class="text-sm text-gray-400">**说明**：衡量一盎司黄金能换多少盎司白银。高比例通常暗示经济衰退风险或白银被低估。</p>
+        </div>
+
+        <!-- 铜金比 -->
+        <div class="bg-gray-800 p-4 rounded-xl shadow-lg">
+            <h2 class="text-xl mb-2 font-semibold">2. 铜金比 (Copper/Gold Ratio)</h2>
+            <div id="cg_chart" class="chart-container">
+                <div id="tradingview_cg"></div>
+                <script type="text/javascript">
+                new TradingView.widget({
+                    "autosize": true, "symbol": "COMEX:HG1!/TVC:GOLD", "interval": "D",
+                    "theme": "dark", "style": "1", "locale": "zh_CN", "container_id": "tradingview_cg"
+                });
+                </script>
+            </div>
+            <p class="text-sm text-gray-400">**说明**：铜代表增长，金代表避险。该比例上升通常预示着经济扩张和债收益率上升。</p>
+        </div>
+
+        <!-- 油金比 -->
+        <div class="bg-gray-800 p-4 rounded-xl shadow-lg">
+            <h2 class="text-xl mb-2 font-semibold">3. 油金比 (WTI Oil/Gold Ratio)</h2>
+            <div id="og_chart" class="chart-container">
+                <div id="tradingview_og"></div>
+                <script type="text/javascript">
+                new TradingView.widget({
+                    "autosize": true, "symbol": "NYMEX:CL1!/TVC:GOLD", "interval": "D",
+                    "theme": "dark", "style": "1", "locale": "zh_CN", "container_id": "tradingview_og"
+                });
+                </script>
+            </div>
+            <p class="text-sm text-gray-400">**说明**：反映通胀与避险情绪的博弈。比例剧动通常伴随地缘政治冲突或能源危机。</p>
+        </div>
+
+        <!-- 加密货币恐惧与贪婪指数 -->
+        <div class="bg-gray-800 p-4 rounded-xl shadow-lg">
+            <h2 class="text-xl mb-2 font-semibold">4. 加密货币恐惧与贪婪指数</h2>
+            <div class="flex justify-center items-center h-[350px]">
+                <img src="https://alternative.me" alt="Fear & Greed Index" class="max-h-full rounded-lg">
+            </div>
+            <p class="text-sm text-gray-400 mt-4">**说明**：0代表“极度恐惧”，100代表“极度贪婪”。用于识别市场情绪的过热或过冷拐点。</p>
+        </div>
+    </div>
+
+    <footer class="text-center py-10 text-gray-500 text-sm">
+        数据实时来源于 TradingView 与 Alternative.me
+    </footer>
+</body>
+</html>

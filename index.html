@@ -3,69 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>宏观指标仪表盘 - 稳定版</title>
+    <title>宏观指标仪表盘 - 2026 兼容版</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-[#0a0e17] text-white p-4">
-    <h1 class="text-2xl font-bold text-center text-yellow-500 mb-6">实时宏观指标监控 (2026)</h1>
+<body class="bg-black text-white">
+    <div class="max-w-6xl mx-auto p-4">
+        <h1 class="text-xl font-bold text-center text-yellow-500 my-4">宏观数据监控 (无需脚本版)</h1>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- 金银比 -->
+            <div class="border border-gray-800 rounded-lg p-2">
+                <h2 class="text-sm mb-2 text-gray-400">1. 金银比走势</h2>
+                <iframe src="https://s.tradingview.com" width="100%" height="350" frameborder="0" allowtransparency="true" scrolling="no"></iframe>
+            </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-7xl mx-auto">
-        <!-- 1. 金银比 - 采用官方走势图 -->
-        <div class="bg-[#131722] p-4 rounded-xl border border-gray-800">
-            <h2 class="text-lg font-semibold mb-3 text-yellow-500">黄金/白银实时对比</h2>
-            <div class="h-[400px]">
-                <div class="tradingview-widget-container">
-                    <div class="tradingview-widget-container__widget"></div>
-                    <script type="text/javascript" src="https://s3.tradingview.com" async>
-                    {
-                      "symbols": [ [ "黄金", "FX_IDC:XAUUSD|1D" ], [ "白银", "FX_IDC:XAGUSD|1D" ] ],
-                      "chartOnly": false, "width": "100%", "height": "100%", "locale": "zh_CN",
-                      "colorTheme": "dark", "gridLineColor": "rgba(42, 46, 57, 0)", "isTransparent": true
-                    }
-                    </script>
+            <!-- 铜金比 -->
+            <div class="border border-gray-800 rounded-lg p-2">
+                <h2 class="text-sm mb-2 text-gray-400">2. 铜金比走势</h2>
+                <iframe src="https://s.tradingview.com" width="100%" height="350" frameborder="0" allowtransparency="true" scrolling="no"></iframe>
+            </div>
+
+            <!-- 3. 加密恐惧指数 -->
+            <div class="border border-gray-800 rounded-lg p-2">
+                <h2 class="text-sm mb-2 text-gray-400">3. 加密恐惧与贪婪</h2>
+                <div class="flex items-center justify-center h-[350px]">
+                    <img src="https://alternative.me" class="max-h-full" alt="F&G Index">
                 </div>
             </div>
-            <p class="mt-2 text-xs text-gray-500">点击标签切换，当金价上涨远超银价时，金银比扩大。</p>
-        </div>
 
-        <!-- 2. 铜金比相关项 -->
-        <div class="bg-[#131722] p-4 rounded-xl border border-gray-800">
-            <h2 class="text-lg font-semibold mb-3 text-orange-400">铜价与避险情绪</h2>
-            <div class="h-[400px]">
-                <div class="tradingview-widget-container">
-                    <div class="tradingview-widget-container__widget"></div>
-                    <script type="text/javascript" src="https://s3.tradingview.com" async>
-                    {
-                      "symbols": [ [ "COMEX铜", "COMEX:HG1!|1D" ], [ "十年美债收益率", "TVC:US10Y|1D" ] ],
-                      "chartOnly": false, "width": "100%", "height": "100%", "locale": "zh_CN", "colorTheme": "dark"
-                    }
-                    </script>
-                </div>
-            </div>
-        </div>
-
-        <!-- 3. 原油价格 -->
-        <div class="bg-[#131722] p-4 rounded-xl border border-gray-800">
-            <h2 class="text-lg font-semibold mb-3 text-blue-400">原油走势 (WTI Oil)</h2>
-            <div class="h-[400px]">
-                <div class="tradingview-widget-container">
-                    <div class="tradingview-widget-container__widget"></div>
-                    <script type="text/javascript" src="https://s3.tradingview.com" async>
-                    {
-                      "symbol": "TVC:USOIL", "width": "100%", "height": "100%", "locale": "zh_CN",
-                      "dateRange": "12M", "colorTheme": "dark", "trendLineColor": "rgba(41, 98, 255, 1)",
-                      "underLineColor": "rgba(41, 98, 255, 0.3)", "isTransparent": true, "autosize": true
-                    }
-                    </script>
-                </div>
-            </div>
-        </div>
-
-        <!-- 4. 加密恐惧指数 -->
-        <div class="bg-[#131722] p-4 rounded-xl border border-gray-800">
-            <h2 class="text-lg font-semibold mb-3 text-green-400">加密货币恐惧与贪婪指数</h2>
-            <div class="flex flex-col items-center justify-center h-[400px]">
-                <img src="https://alternative.me" class="max-h-[350px] w-auto rounded shadow-lg" alt="Crypto F&G">
+            <!-- 说明栏 -->
+            <div class="border border-gray-800 rounded-lg p-4 text-sm text-gray-400">
+                <h2 class="font-bold text-white mb-2 underline">排查说明：</h2>
+                <p>1. 如果上方显示<strong>“无法连接”</strong>或<strong>“拒绝请求”</strong>：这是因为您的运营商屏蔽了 TradingView 的海外服务器。请开启加速工具（VPN）并选择全局模式。</p>
+                <p class="mt-2">2. 如果只有<strong>图片</strong>出来了（加密指数）：说明您的网页已经上线成功，但图表动态数据被墙阻断。</p>
             </div>
         </div>
     </div>

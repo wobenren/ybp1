@@ -5,79 +5,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>全球宏观指标仪表盘 - 2026版</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        .chart-container { height: 400px; margin-bottom: 2rem; }
-    </style>
 </head>
-<body class="bg-gray-900 text-white p-5">
-    <header class="text-center mb-10">
-        <h1 class="text-3xl font-bold text-yellow-500">宏观资产比例与情绪监控</h1>
-        <p class="text-gray-400">实时追踪金银比、铜金比、油金比及加密情绪</p>
+<body class="bg-gray-900 text-white p-4">
+    <header class="text-center mb-8">
+        <h1 class="text-2xl font-bold text-yellow-500">宏观资产比例与情绪监控</h1>
+        <p class="text-xs text-gray-500 mt-2">数据每分钟自动刷新</p>
     </header>
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-7xl mx-auto">
         <!-- 金银比 -->
-        <div class="bg-gray-800 p-4 rounded-xl shadow-lg">
-            <h2 class="text-xl mb-2 font-semibold">1. 金银比 (Gold/Silver Ratio)</h2>
-            <div id="gs_chart" class="chart-container">
-                <!-- TradingView Widget BEGIN -->
-                <div class="tradingview-widget-container" style="height:100%;width:100%">
-                    <div id="tradingview_gs"></div>
-                    <script type="text/javascript" src="https://s3.tradingview.com"></script>
-                    <script type="text/javascript">
-                    new TradingView.widget({
-                        "autosize": true, "symbol": "TVC:GOLD/TVC:SILVER", "interval": "D",
-                        "timezone": "Etc/UTC", "theme": "dark", "style": "1", "locale": "zh_CN",
-                        "container_id": "tradingview_gs", "hide_side_toolbar": true, "allow_symbol_change": false
-                    });
-                    </script>
-                </div>
-            </div>
-            <p class="text-sm text-gray-400">**说明**：衡量一盎司黄金能换多少盎司白银。高比例通常暗示经济衰退风险或白银被低估。</p>
+        <div class="bg-gray-800 p-4 rounded-xl border border-gray-700 shadow-2xl">
+            <h2 class="text-lg font-bold mb-3 border-l-4 border-yellow-500 pl-2">金银比 (Gold/Silver)</h2>
+            <div id="chart_gs" class="h-[400px]"></div>
         </div>
 
         <!-- 铜金比 -->
-        <div class="bg-gray-800 p-4 rounded-xl shadow-lg">
-            <h2 class="text-xl mb-2 font-semibold">2. 铜金比 (Copper/Gold Ratio)</h2>
-            <div id="cg_chart" class="chart-container">
-                <div id="tradingview_cg"></div>
-                <script type="text/javascript">
-                new TradingView.widget({
-                    "autosize": true, "symbol": "COMEX:HG1!/TVC:GOLD", "interval": "D",
-                    "theme": "dark", "style": "1", "locale": "zh_CN", "container_id": "tradingview_cg"
-                });
-                </script>
-            </div>
-            <p class="text-sm text-gray-400">**说明**：铜代表增长，金代表避险。该比例上升通常预示着经济扩张和债收益率上升。</p>
+        <div class="bg-gray-800 p-4 rounded-xl border border-gray-700 shadow-2xl">
+            <h2 class="text-lg font-bold mb-3 border-l-4 border-orange-500 pl-2">铜金比 (Copper/Gold)</h2>
+            <div id="chart_cg" class="h-[400px]"></div>
         </div>
 
         <!-- 油金比 -->
-        <div class="bg-gray-800 p-4 rounded-xl shadow-lg">
-            <h2 class="text-xl mb-2 font-semibold">3. 油金比 (WTI Oil/Gold Ratio)</h2>
-            <div id="og_chart" class="chart-container">
-                <div id="tradingview_og"></div>
-                <script type="text/javascript">
-                new TradingView.widget({
-                    "autosize": true, "symbol": "NYMEX:CL1!/TVC:GOLD", "interval": "D",
-                    "theme": "dark", "style": "1", "locale": "zh_CN", "container_id": "tradingview_og"
-                });
-                </script>
-            </div>
-            <p class="text-sm text-gray-400">**说明**：反映通胀与避险情绪的博弈。比例剧动通常伴随地缘政治冲突或能源危机。</p>
+        <div class="bg-gray-800 p-4 rounded-xl border border-gray-700 shadow-2xl">
+            <h2 class="text-lg font-bold mb-3 border-l-4 border-blue-500 pl-2">油金比 (WTI Oil/Gold)</h2>
+            <div id="chart_og" class="h-[400px]"></div>
         </div>
 
-        <!-- 加密货币恐惧与贪婪指数 -->
-        <div class="bg-gray-800 p-4 rounded-xl shadow-lg">
-            <h2 class="text-xl mb-2 font-semibold">4. 加密货币恐惧与贪婪指数</h2>
+        <!-- 加密恐惧指数 -->
+        <div class="bg-gray-800 p-4 rounded-xl border border-gray-700 shadow-2xl">
+            <h2 class="text-lg font-bold mb-3 border-l-4 border-green-500 pl-2">加密货币恐惧与贪婪指数</h2>
             <div class="flex justify-center items-center h-[350px]">
-                <img src="https://alternative.me" alt="Fear & Greed Index" class="max-h-full rounded-lg">
+                <img src="https://alternative.me" class="max-h-full rounded-lg" alt="Fear and Greed Index">
             </div>
-            <p class="text-sm text-gray-400 mt-4">**说明**：0代表“极度恐惧”，100代表“极度贪婪”。用于识别市场情绪的过热或过冷拐点。</p>
         </div>
     </div>
 
-    <footer class="text-center py-10 text-gray-500 text-sm">
-        数据实时来源于 TradingView 与 Alternative.me
-    </footer>
+    <!-- 关键修复：使用异步加载并确保符号名带上交易所前缀 -->
+    <script type="text/javascript" src="https://s3.tradingview.com"></script>
+    <script type="text/javascript">
+        function initCharts() {
+            if (typeof TradingView === 'undefined') return;
+
+            const baseConfig = {
+                "autosize": true,
+                "interval": "D",
+                "timezone": "Etc/UTC",
+                "theme": "dark",
+                "style": "1",
+                "locale": "zh_CN",
+                "enable_publishing": false,
+                "hide_top_toolbar": false,
+                "hide_legend": false,
+                "save_image": false,
+                "container_id": ""
+            };
+
+            // 修复点：必须指定明确的交易所前缀，否则无法解析比率
+            new TradingView.widget({ ...baseConfig, "container_id": "chart_gs", "symbol": "FX_IDC:XAUUSD/FX_IDC:XAGUSD" });
+            new TradingView.widget({ ...baseConfig, "container_id": "chart_cg", "symbol": "COMEX:HG1!/TVC:GOLD" });
+            new TradingView.widget({ ...baseConfig, "container_id": "chart_og", "symbol": "NYMEX:CL1!/TVC:GOLD" });
+        }
+
+        // 确保脚本加载后执行
+        window.onload = initCharts;
+    </script>
 </body>
 </html>
